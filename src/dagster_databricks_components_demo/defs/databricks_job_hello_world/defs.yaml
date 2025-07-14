@@ -1,0 +1,12 @@
+type: dagster_databricks_components_demo.components.databricks_job_component.DatabricksJobComponent
+
+attributes:
+  job_id: 1000180891217799
+  workspace_config:
+    host: "{{ env.DATABRICKS_HOST }}"
+    token: "{{ env.DATABRICKS_TOKEN }}"
+  asset_specs:
+    - key: databricks_hello_world
+      description: Result of running the Databricks `hello_world` job.
+      kinds:
+        - databricks
