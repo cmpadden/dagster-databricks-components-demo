@@ -11,6 +11,7 @@ dependencies = [
 dev = [
     "dagster-webserver",
     "dagster-dg-cli",
+    "ruff>=0.12.3",
 ]
 
 [build-system]

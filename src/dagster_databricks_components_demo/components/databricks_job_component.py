@@ -8,24 +8,29 @@ class DatabricksWorkspaceConfig(dg.Model):
     host: str
     token: str
 
-    def workspace_client(self):
-        return WorkspaceClient(host=host, token=token)
+    def get_client(self):
+        return WorkspaceClient(host=self.host, token=self.token)
 
 
 class DatabricksJobComponent(dg.Component, dg.Model, dg.Resolvable):
     """Run Databricks jobs from Dagster and attach corresponding assets."""
 
     job_id: int
+    job_parameters: dict[str, str] | None = None
     workspace_config: DatabricksWorkspaceConfig
     asset_specs: Sequence[dg.ResolvedAssetSpec]
 
     def build_defs(self, context: dg.ComponentLoadContext) -> dg.Definitions:
         @dg.multi_asset(name=f"databricks_job_{self.job_id}", specs=self.asset_specs)
         def _asset(context: dg.AssetExecutionContext):
-            self.execute(resolved_script_path, context)
+            self.execute(context)
 
         return dg.Definitions(assets=[_asset])
 
-    def execute(self, job_id: str, context: dg.AssetExecutionContext):
-        context.log.info(f"Running databricks job: {job_id}")
-        return subprocess.run(["sh", str(resolved_script_path)], check=True)
+    def execute(self, context: dg.AssetExecutionContext):
+        context.log.info(f"Running databricks job: {self.job_id}")
+        wc = self.workspace_config.get_client()
+        return wc.jobs.run_now_and_wait(
+            job_id=self.job_id,
+            job_parameters=self.job_parameters,
+        )
