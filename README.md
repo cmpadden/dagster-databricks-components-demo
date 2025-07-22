@@ -1,3 +1,6 @@
+
+<img width="1400" height="225" alt="Frame 21" src="https://github.com/user-attachments/assets/6c3e4596-b1ea-4196-bc36-965a34f3d3f1" />
+
 # Dagster Databricks Components Demo
 
 This project demonstrates how to use Dagster Components to interface with Databricks and create a unified view of your data platform. It showcases how components make it easy to orchestrate Databricks jobs while maintaining full visibility and lineage tracking within Dagster's single pane of glass.
