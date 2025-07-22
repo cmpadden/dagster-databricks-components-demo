@@ -12,6 +12,8 @@ attributes:
 
   asset_specs:
     - key: account_performance
+      owners:
+        - "alice@acme.com"
       deps:
         - prepared_accounts
         - prepared_customers
@@ -19,12 +21,16 @@ attributes:
         - parquet
 
     - key: transactions
+      owners:
+        - "alice@acme.com"
       deps:
         - prepared_transactions
       kinds:
         - parquet
 
     - key: customer_insights
+      owners:
+        - "alice@acme.com"
       deps:
         - prepared_customers
         - prepared_transactions
