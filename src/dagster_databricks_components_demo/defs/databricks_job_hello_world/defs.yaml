@@ -2,11 +2,36 @@ type: dagster_databricks_components_demo.components.databricks_job_component.Dat
 
 attributes:
   job_id: 1000180891217799
+  job_parameters:
+    source_file_prefix: "s3://acme-analytics/raw"
+    destination_file_prefix: "s3://acme-analytics/reports"
+
   workspace_config:
     host: "{{ env.DATABRICKS_HOST }}"
     token: "{{ env.DATABRICKS_TOKEN }}"
+
   asset_specs:
-    - key: databricks_hello_world
-      description: Result of running the Databricks `hello_world` job.
+    - key: account_performance
+      deps:
+        - prepared_accounts
+        - prepared_customers
       kinds:
-        - databricks
+        - parquet
+
+    - key: transactions
+      deps:
+        - prepared_transactions
+      kinds:
+        - parquet
+
+    - key: customer_insights
+      deps:
+        - prepared_customers
+        - prepared_transactions
+      kinds:
+        - parquet
+
+requirements:
+  env:
+    - DATABRICKS_HOST
+    - DATABRICKS_TOKEN
