@@ -20,7 +20,7 @@ class DatabricksJobComponent(dg.Component, dg.Model, dg.Resolvable):
     job_id: int
     job_parameters: dict[str, str] | None = None
     workspace_config: DatabricksWorkspaceConfig
-    asset_specs: Sequence[dg.ResolvedAssetSpec]
+    assets: Sequence[dg.ResolvedAssetSpec]
 
     def build_defs(self, context: dg.ComponentLoadContext) -> dg.Definitions:
         # replace default attributes
@@ -30,7 +30,7 @@ class DatabricksJobComponent(dg.Component, dg.Model, dg.Resolvable):
             )
             if not spec.description
             else spec
-            for spec in self.asset_specs
+            for spec in self.assets
         ]
 
         # merge default attributes

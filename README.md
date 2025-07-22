@@ -112,7 +112,7 @@ attributes:
     host: "{{ env.DATABRICKS_HOST }}"
     token: "{{ env.DATABRICKS_TOKEN }}"
   
-  asset_specs:
+  assets:
     - key: account_performance
       owners: ["alice@acme.com"]
       deps: [prepared_accounts, prepared_customers]
