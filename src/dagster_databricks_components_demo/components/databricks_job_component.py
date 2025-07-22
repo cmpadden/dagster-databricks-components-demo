@@ -3,7 +3,6 @@ import dagster as dg
 
 from databricks.sdk import WorkspaceClient
 from dataclasses import dataclass
-from functools import cached_property
 
 
 @dataclass
