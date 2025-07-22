@@ -43,7 +43,7 @@ dagster-databricks-components-demo/
 │       ├── components/
 │       │   └── databricks_job_component.py    # Custom Databricks component
 │       ├── defs/
-│       │   └── databricks_job_hello_world/
+│       │   └── databricks_job/
 │       │       └── defs.yaml                  # Component configuration
 │       └── definitions.py                     # Main Dagster definitions
 ├── pyproject.toml                             # Project dependencies
@@ -97,7 +97,7 @@ dagster-databricks-components-demo/
 
 ## Component Configuration
 
-The demo uses a YAML-based configuration in `src/dagster_databricks_components_demo/defs/databricks_job_hello_world/defs.yaml`:
+The demo uses a YAML-based configuration in `src/dagster_databricks_components_demo/defs/databricks_job/defs.yaml`:
 
 ```yaml
 type: dagster_databricks_components_demo.components.databricks_job_component.DatabricksJobComponent
@@ -134,13 +134,4 @@ attributes:
 - Explore scheduling and sensor capabilities for automated pipeline execution
 - Integrate with your existing CI/CD workflows
 
-## Contributing
-
-This demo showcases the core concepts of Dagster Components with Databricks. Feel free to extend it with additional features like:
-
-- Multiple job configurations
-- Custom metadata extraction
-- Error handling and retry logic
-- Integration with other data platforms
-
-For more information about Dagster Components, visit the [official documentation](https://docs.dagster.io/concepts/components).
+For more information about Dagster Components, visit the [official documentation](https://docs.dagster.io/).
