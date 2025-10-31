@@ -14,6 +14,29 @@ class DatabricksWorkspaceConfig(dg.Resolvable):
         return WorkspaceClient(host=self.host, token=self.token)
 
 
+class DatabricksJobScaffolder(dg.Scaffolder):
+    def scaffold(self, request: dg.ScaffoldRequest) -> None:
+        dg.scaffold_component(
+            request,
+            {
+                "job_id": 0,
+                "job_parameters": {},
+                "workspace_config": {
+                    "host": "{{ env.DATABRICKS_HOST }}",
+                    "token": "{{ env.DATABRICKS_TOKEN }}",
+                },
+                "assets": [
+                    {
+                        "key": "databricks_asset",
+                        "descrikkption": f"Generated asset from Databricks job",
+                        "kinds": ["databricks"],
+                    }
+                ],
+            },
+        )
+
+
+@dg.scaffold_with(DatabricksJobScaffolder)
 class DatabricksJobComponent(dg.Component, dg.Model, dg.Resolvable):
     """Run Databricks jobs from Dagster and attach corresponding assets."""
 
